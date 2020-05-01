@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ShopProgramGUI">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Register">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#RegisterWindow" text="add a person" />
+               </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Organize">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#OrganizeWindow" text="organize the people" />
+               </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Search">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#SearchWindow" text="Search a person" />
+               </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Add Product">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#AddProductWindow" text="add a product to a client" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="List">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#ListWindow" text="List of the people in the program" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Better Employee">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#BetterEmployeeWindow" text="The Employee of the month" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <BorderPane fx:id="mainPanel" prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <Label text="¡¡¡SHOP PROGRAM!!!" textFill="#4015a4" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+   </children>
+</VBox>

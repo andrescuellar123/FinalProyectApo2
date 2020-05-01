@@ -15,7 +15,7 @@ public class Human {
 	 * @param right
 	 * @param next
 	 */
-	public Human(String name, String id) {
+	public Human(String name, String id,boolean empleado) {
 		super();
 		this.name = name;
 		this.empleado = empleado;
