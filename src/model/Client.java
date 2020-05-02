@@ -11,8 +11,8 @@ public class Client extends Human {
 	 * @param prev
 	 * @param prod
 	 */
-	public Client (Client next, Client prev, String id, String name) {
-		super(id, name);
+	public Client (Client next, Client prev, String id, String name,boolean emplo) {
+		super(id, name,emplo);
 		this.next = next;
 		this.prev = prev;
 		prod = new ArrayList<Product>();
@@ -53,8 +53,11 @@ public class Client extends Human {
 	public void setProd(ArrayList<Product> prod) {
 		this.prod = prod;
 	}
-	
-	
-	
-	
+
+	public void addProducto( Product p ) {
+		prod.add(p);
+	}
+
+
+
 }

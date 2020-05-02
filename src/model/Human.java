@@ -1,6 +1,6 @@
 package model;
 
-public class Human {
+public class Human implements Comparable<Human>{
 	protected String name;
 	protected boolean empleado;
 	protected String id;
@@ -97,7 +97,113 @@ public class Human {
 		this.next = next;
 	}
 	
+	@Override
+	public int compareTo(Human o) {
+		
+		return o.getId().compareTo(id) ;
+	}
 	
+	/** Description : is this a leaf
+	 * return boolean
+	 */
 	
+    public boolean leaf( ){
+    	boolean p=false;
+    	if(left == null && right == null) {
+    		p=true;
+    	}
+        return p;
+    }
+    
+	/** Description : inset a Human in tree
+	 */
+	public void insertHuman(Human v) throws RepetitiveException {
+
+		 if((compareTo(v)< 0)) {
+			
+            if( right == null )
+            	right = v;
+            else
+            	right.insertHuman( v );
+		}
+		else if((compareTo(v)> 0)) {
+			
+            if( left == null )
+            	left = v;
+            else
+            	left.insertHuman( v );
+		}
+		else if(compareTo(v)==0) {
+				throw new RepetitiveException(" Esta id ya esta siendo usada");
+			}
+		
+	}
+	
+	/** Description :  the weight
+	 * return int
+	 */
+	
+    public int weight() {
+    	
+    	int weight1=0;
+    	int weight2=0;
+    	
+    	if(left  != null)
+    		weight1= left.weight();
+    	else if(right != null) {
+    		weight2= right.weight();
+    	}
+    	else if(left  == null){
+    		weight1=0;
+    		
+    	}
+    	else if(right == null){
+    		
+    		weight2=0;
+    	}
+ 
+        return weight1 + weight2 +1;
+    }
+    
+	/** Description :  the Height
+	 * return int
+	 */
+    public int Height() {
+    	
+    	
+        if( leaf() )
+            return 1;
+        else{
+        	int height1=0;
+        	int height2=0;
+        	
+        	if(left  != null)
+        		height1= left.Height();
+        	else if(right != null) {
+        		height2= right.Height();
+        	}
+        	else if(left  == null){
+        		height1=0;
+        		
+        	}
+        	else if(right == null){
+        		
+        		height2=0;
+        	}
+
+    	    return 1 + Math.max( height1, height2) ;
+    	}
+    }
+
+	public int compare(Client o1, Client o2) {
+		int substraction = 0;
+		double x = o1.getId().compareTo(o2.getId());
+		if(x > 0) {
+			substraction = 1;
+		}else if(x < 0) {
+			substraction = -1;
+		}
+		return substraction;
+	}
 	
 }
