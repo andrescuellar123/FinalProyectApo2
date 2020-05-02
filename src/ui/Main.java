@@ -12,7 +12,7 @@ public class Main extends Application{
 	private ShopProgram shop;
 	
 	public Main() {
-		shop = new ShopProgram(null,null);
+		shop = new ShopProgram();
 		shopGUI = new ShopProgramGUI(shop);
 	}
 	public static void main(String[] args) {

@@ -8,11 +8,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import model.ShopProgram;
-
-public class ShopProgramGUI {
+import model.*
+;public class ShopProgramGUI {
 	private ShopProgram shop;
 	
 	  @FXML
@@ -24,7 +25,10 @@ public class ShopProgramGUI {
 	    private TextField idTxt;
 
 	    @FXML
-	    private ChoiceBox<String> isEmployee;
+	    private RadioButton TrueB;
+
+	    @FXML
+	    private RadioButton FalseB;
 
 
 
@@ -101,7 +105,13 @@ public class ShopProgramGUI {
     void AddPerson(ActionEvent event) {
     	String name = nameTxt.getText();
     	String id = idTxt.getId();
-    	boolean empl = Boolean.parseBoolean(isEmployee.getValue().toString());
+    	boolean empl = false;
+    	if(TrueB.isSelected()) {
+    		empl = true;
+    	}else {
+    		empl = false;
+    	}
     	
+    	Human hu = new Human(name,id,empl);
     }
 }

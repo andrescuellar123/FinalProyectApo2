@@ -11,7 +11,7 @@ public class Client extends Human {
 	 * @param prev
 	 * @param prod
 	 */
-	public Client (Client next, Client prev, String id, String name,boolean emplo) {
+	public Client ( String id, String name,boolean emplo) {
 		super(id, name,emplo);
 		this.next = next;
 		this.prev = prev;
@@ -58,6 +58,7 @@ public class Client extends Human {
 		prod.add(p);
 	}
 
+	
 
 
 }

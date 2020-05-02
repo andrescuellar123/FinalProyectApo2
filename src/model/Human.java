@@ -4,9 +4,9 @@ public class Human implements Comparable<Human>{
 	protected String name;
 	protected boolean empleado;
 	protected String id;
-	protected Human left;
-	protected Human right;
-	protected Human next;
+	private Human left;
+	private Human right;
+	private Human next;
 	/**
 	 * @param name
 	 * @param empleado
@@ -22,7 +22,7 @@ public class Human implements Comparable<Human>{
 		this.id = id;
 		this.left = left;
 		this.right = right;
-		this.next = next;
+		this.next = null;
 	}
 	/**
 	 * @return the name
@@ -97,11 +97,7 @@ public class Human implements Comparable<Human>{
 		this.next = next;
 	}
 	
-	@Override
-	public int compareTo(Human o) {
-		
-		return o.getId().compareTo(id) ;
-	}
+
 	
 	/** Description : is this a leaf
 	 * return boolean
@@ -137,6 +133,9 @@ public class Human implements Comparable<Human>{
 				throw new RepetitiveException(" Esta id ya esta siendo usada");
 			}
 		
+	}
+	public int compareTo(Employee em) {
+		return em.getId().compareTo(id) ;
 	}
 	
 	/** Description :  the weight
@@ -195,7 +194,7 @@ public class Human implements Comparable<Human>{
     	}
     }
 
-	public int compare(Client o1, Client o2) {
+	public int compare(Human o1, Human o2) {
 		int substraction = 0;
 		double x = o1.getId().compareTo(o2.getId());
 		if(x > 0) {
@@ -204,6 +203,11 @@ public class Human implements Comparable<Human>{
 			substraction = -1;
 		}
 		return substraction;
+	}
+	
+	@Override
+	public int compareTo(Human o) {
+		return o.getId().compareTo(id) ;
 	}
 	
 }
