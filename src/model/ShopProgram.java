@@ -1,11 +1,17 @@
 package model;
 
+import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class ShopProgram {
 
 	private Employee empleadoRaiz;
 	private Client first;
+	private ArrayList<Client> na ;
+	private ArrayList<String> na2 ;
+	private ArrayList<String> id ;
 	/**
 	 * @param empleadoRaiz
 	 * @param first
@@ -13,6 +19,8 @@ public class ShopProgram {
 	public ShopProgram() {
 		Employee empleadoRaiz = new Employee(null, null, true);
 		this.first = first;
+		na = new ArrayList<Client>();
+		id = new ArrayList<String>();
 	}
 
 	public String getNameEmployee() {
@@ -28,22 +36,9 @@ public class ShopProgram {
 	}
 
 
-	//	public void insertar(String name , String id) {
-	//		if (empleadoRaiz == null) {
-	//			Employee nuevo = new Employee(name , id ,true);
-	//			nuevo.setDer(new ShopProgram());
-	//			nuevo.setIzq(new ShopProgram());
-	//			empleadoRaiz = nuevo;
-	//		} else {
-	//			if (a > raiz.getDato()) {
-	//				(raiz.getDer()).insertar(a);
-	//			}
-	//			if (a < raiz.getDato()) {
-	//				(raiz.getIzq()).insertar(a);
-	//			}
-	//		}
-	//	}
 
+
+	
 	/**
 	 * @return the empleadoRaiz
 	 */
@@ -52,10 +47,75 @@ public class ShopProgram {
 	}
 
 	/**
+	 * @return the na2
+	 */
+	public ArrayList<String> getNa2() {
+		if(first != null) {
+			Client act = first;
+			String msg="";
+			while(act != null){
+				msg=act.getName();
+				na2.add(msg);
+				act = act.getNext();
+				
+			}
+			
+		}
+		return na2;
+	}
+
+	/**
+	 * @param na2 the na2 to set
+	 */
+	public void setNa2(ArrayList<String> na2) {
+		this.na2 = na2;
+	}
+
+	/**
 	 * @param empleadoRaiz the empleadoRaiz to set
 	 */
 	public void setEmpleadoRaiz(Employee empleadoRaiz) {
 		this.empleadoRaiz = empleadoRaiz;
+	}
+	
+
+
+
+	/**
+	 * @return the na
+	 */
+	public ArrayList<Client> getNa() {
+		if(first != null) {
+			Client act = first;
+			while(act != null){
+				na.add(act);
+				act = act.getNext();
+				
+			}
+			
+		}
+		return na;
+	}
+
+	/**
+	 * @param na the na to set
+	 */
+	public void setNa(ArrayList<Client> na) {
+		this.na = na;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public ArrayList<String> getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(ArrayList<String> id) {
+		this.id = id;
 	}
 
 	public void addHumanTree(String name , String id) {
@@ -98,60 +158,45 @@ public class ShopProgram {
 	//Clientes
 
 
-		public boolean addCliente(String name , String id) throws RepetitiveException {
-			Client c = new Client(name,id,false);
-			boolean added = false;
-			Client actual = first;
-			if(actual == null) {
-				added = true;
-				first = c;
-				first.setNext(null);
-				first.setPrev(null);
-			}else if(!sameCliente(c)) {
-				while(actual!=null && !added) {
-					if(actual.getNext()==null) {
-						actual.setNext(c);
-						actual.getNext().setPrev(actual);
-						added = true;
-					}
-					actual = actual.getNext();
-				}
-			}else {
-				throw new RepetitiveException("El cliente ya existe!"); 
-			}
-			return added;
-		}
-	
-		public boolean sameCliente(Client c) {
-			boolean same = false;
-			Client actual = first;
-			while(actual != null && !same) {
-				if(actual.compareTo(c)==0) {
-					same = true;
+	public boolean addCliente(String name , String id) throws RepetitiveException {
+		Client c = new Client(name,id,false);
+		boolean added = false;
+		Client actual = first;
+		if(actual == null) {
+			added = true;
+			first = c;
+			first.setNext(null);
+			first.setPrev(null);
+		}else if(!sameCliente(c)) {
+			while(actual!=null && !added) {
+				if(actual.getNext()==null) {
+					actual.setNext(c);
+					actual.getNext().setPrev(actual);
+					added = true;
 				}
 				actual = actual.getNext();
 			}
-			return same;
+		}else {
+			throw new RepetitiveException("El cliente ya existe!"); 
 		}
+		return added;
+	}
+
+	public boolean sameCliente(Client c) {
+		boolean same = false;
+		Client actual = first;
+		while(actual != null && !same) {
+			if(actual.compareTo(c)==0) {
+				same = true;
+			}
+			actual = actual.getNext();
+		}
+		return same;
+	}
 
 
-//	public boolean addClient(String name , String id) {
-//		boolean add=false;
-//		if(first == null) {
-//			first= new Client(name,id,false);
-//			add=true;
-//		}
-//		else {
-//			Client temp = first;
-//			while(temp.getNext() != null) {
-//				temp = temp.getNext();
-//			}
-//			temp.setNext(new Client (name,id,false ));
-//			add= true;
-//		}
-//		return add;
-//	}
 	
+
 
 
 	public String ShowClients() {
@@ -159,14 +204,28 @@ public class ShopProgram {
 		if(first != null) {
 			Client act = first;
 			while(act != null) {
-				System.out.println( act.getId() + " "+act.getName()) ;
-				msg = act.getId() + act.getName();
-				act = act.getNext();
 				
-			}
-		 
-		  
-		  
+				msg +=  act.getName()+" ";
+				
+				act = act.getNext();
+
+			} 
+
+		}
+		return msg;
+	}
+	public String ShowClients2() {
+		String msg = "";
+		if(first != null) {
+			Client act = first;
+			while(act != null) {
+				
+				msg +=  act.getId()+" ";
+				
+				act = act.getNext();
+
+			} 
+
 		}
 		return msg;
 	}
@@ -184,4 +243,24 @@ public class ShopProgram {
 		}
 		return e;
 	}
+
+	public void addProduct(String name, double cost, String id) {
+		Product p = new Product(name,cost);
+		findClient(id).addProducto(p);
+	}
+
+
+	public String[] names (){
+		String[] ar = ShowClients().split(" ");
+		return ar;
+		
+	}
+	public String[] ids() {
+		String[] ar = ShowClients2().split(" ");
+		return ar;
+	}
+
+
+
+
 }

@@ -37,6 +37,8 @@
                   <RadioButton fx:id="FalseB" mnemonicParsing="false" prefHeight="30.0" prefWidth="87.0" text="False" toggleGroup="$ISEMP" />
                </children>
             </HBox>
+            <Label fx:id="addresponse" layoutX="439.0" layoutY="298.0" />
+            <Label fx:id="th" layoutX="157.0" layoutY="290.0" />
          </children>
       </Pane>
    </center>

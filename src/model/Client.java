@@ -6,6 +6,7 @@ public class Client extends Human {
 	private Client next;
 	private Client prev;
 	private ArrayList<Product> prod;
+	
 	/**
 	 * @param next
 	 * @param prev
@@ -57,6 +58,7 @@ public class Client extends Human {
 	public void addProducto( Product p ) {
 		prod.add(p);
 	}
+	
 
 	
 

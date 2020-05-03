@@ -1,19 +1,27 @@
 package ui;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import model.ShopProgram;
-import model.*
-;public class ShopProgramGUI {
+import model.*;
+public class ShopProgramGUI implements Initializable{
 	private ShopProgram shop;
 	
 	  @FXML
@@ -29,9 +37,35 @@ import model.*
 
 	    @FXML
 	    private RadioButton FalseB;
+	    
+	    @FXML
+	    private Label addresponse;
+	    
+	    @FXML
+	    private Label th;
 
+	    @FXML
+	    private TextField Prname;
 
+	    @FXML
+	    private TextField Prcost;
 
+	    @FXML
+	    private Label PrResponse;
+	    
+	    @FXML
+	    private TextField PrId;
+	    
+	    private Client x;
+	    
+	    @FXML
+	    private TableView<Client> tcV;
+
+	    @FXML
+	    private TableColumn<Client, String> NameClients;
+
+	    @FXML
+	    private TableColumn<Client, String> idClients;
 	/**
 	 * @param shop
 	 */
@@ -48,6 +82,7 @@ import model.*
 		Parent pa4 = (Parent)fxmlLoader.load();
 		mainPanel.getChildren().clear();
     	mainPanel.setTop(pa4);
+    	
 	}
 
 	@FXML
@@ -62,12 +97,13 @@ import model.*
 
 	@FXML
 	void ListWindow(ActionEvent event) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddProductWindow.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ListWindow.fxml"));
 		
 		fxmlLoader.setController(this);    	
 		Parent pa5 = (Parent)fxmlLoader.load();
 		mainPanel.getChildren().clear();
     	mainPanel.setTop(pa5);
+    	initialize2();
 	}
 
 	@FXML
@@ -102,16 +138,53 @@ import model.*
 	}
 
     @FXML
-    void AddPerson(ActionEvent event) {
+    void AddPerson(ActionEvent event) throws RepetitiveException {
     	String name = nameTxt.getText();
     	String id = idTxt.getId();
     	boolean empl = false;
     	if(TrueB.isSelected()) {
     		empl = true;
-    	}else {
+    	}
+    	else if(FalseB.isSelected()) {
     		empl = false;
+    		shop.addCliente(name, id);
+    		addresponse.setText("you have create a Client");
+    		String r = shop.findClient(id).getName();
+    		th.setText(r);
+    		nameTxt.clear();
+    		idTxt.clear();
     	}
     	
-    	Human hu = new Human(name,id,empl);
     }
+    
+    @FXML
+    void AddProduct(ActionEvent event) {
+    	initialize2();
+    	String name = Prname.getText();
+    	double cost = Double.parseDouble(Prcost.getText());
+    	String id = PrId.getText();
+    	Product p = new Product (name,cost);
+    	
+    	//shop.findClient(id).addProducto(p);
+    	
+    	PrResponse.setText(x.getId());
+    }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		
+		
+		
+	}
+	public void initialize2(){
+	  	ObservableList<Client> observableList;
+    	observableList = FXCollections.observableArrayList(shop.getNa());
+    	
+    	tcV.setItems(observableList);
+    	NameClients.setCellValueFactory(new PropertyValueFactory<Client,String>("name"));
+    	NameClients.setCellValueFactory(new PropertyValueFactory<Client,String>("id"));
+	}
+    
+  
 }
