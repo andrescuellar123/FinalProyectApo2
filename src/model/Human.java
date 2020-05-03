@@ -97,6 +97,7 @@ public class Human implements Comparable<Human>{
 		this.next = next;
 	}
 	
+	
 
 	
 	/** Description : is this a leaf

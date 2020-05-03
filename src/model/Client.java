@@ -7,6 +7,7 @@ public class Client extends Human {
 	private Client prev;
 	private ArrayList<Product> prod;
 	
+	
 	/**
 	 * @param next
 	 * @param prev

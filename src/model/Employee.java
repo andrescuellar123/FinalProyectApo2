@@ -12,6 +12,7 @@ public class Employee extends Human{
 	 * @param raiz
 	 * @param size
 	 */
+	
 	public Employee( String name, String id,boolean employee) {
 		super(name,id,employee);
 		  der = null;
