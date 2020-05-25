@@ -6,17 +6,18 @@ public class Client extends Human {
 	private Client next;
 	private Client prev;
 	private ArrayList<Product> prod;
-	
+	private Double total;
 	
 	/**
 	 * @param next
 	 * @param prev
 	 * @param prod
 	 */
-	public Client ( String id, String name,boolean emplo) {
-		super(id, name,emplo);
+	public Client ( String name, String id,String phone,boolean emplo) {
+		super( name,id,phone,emplo);
 		this.next = next;
 		this.prev = prev;
+		total = 0.0 ;
 		prod = new ArrayList<Product>();
 	}
 	/**
@@ -56,9 +57,52 @@ public class Client extends Human {
 		this.prod = prod;
 	}
 
-	public void addProducto( Product p ) {
+	public void addProducto( Product p) {
+		
 		prod.add(p);
 	}
+	
+
+
+	/**
+	 * @return the total
+	 */
+	public Double getTotal() {
+		total = all();
+		if(total == 200000) {
+			total = total - 20000;
+		}
+		
+		return total;
+	}
+	
+	
+	public Double all() {
+		double all=0;
+		for (int i = 0; i < prod.size(); i++) {
+			all+= prod.get(i).getCost();
+		}
+		if(all == 200000) {
+			all = all - 20000;
+		}
+		return all;
+	}
+	/**
+	 * @param total the total to set
+	 */
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+	
+//	public double total() {
+//		
+//		for (int i = 0; i < prod.size(); i++) {
+//			total+= prod.get(i).getCost();
+//		}
+//		return total;
+//	}
+
+	
 	
 
 	

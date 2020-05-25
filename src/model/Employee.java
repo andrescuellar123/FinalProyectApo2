@@ -2,21 +2,25 @@ package model;
 
 import java.util.ArrayList;
 
+
+
 public class Employee extends Human{
-	private Human raiz;
+	
 	private Employee der;
 	private Employee izq;
 	private ArrayList<Client>clients;
+	private int numClients;
 	
 	/**
 	 * @param raiz
 	 * @param size
 	 */
 	
-	public Employee( String name, String id,boolean employee) {
-		super(name,id,employee);
+	public Employee( String name, String id,String phone,boolean employee) {
+		super(name,id,phone,employee);
 		  der = null;
 	      izq = null;
+	      numClients=0;
 		clients = new ArrayList<Client>();
 	}
 	
@@ -47,20 +51,6 @@ public class Employee extends Human{
 	public void setIzq(Employee izq) {
 		this.izq = izq;
 	}
-
-	/**
-	 * @return the raiz
-	 */
-	public Human getRaiz() {
-		return raiz;
-	}
-	/**
-	 * @param raiz the raiz to set
-	 */
-	public void setRaiz(Human raiz) {
-		this.raiz = raiz;
-	}
-	
 	
 	/**
 	 * @return the clients
@@ -76,47 +66,114 @@ public class Employee extends Human{
 		this.clients = clients;
 	}
 
-	@Override
-	public int compareTo(Employee em) {
-		int substraction = 0;
-		double x = this.getId().compareTo(em.getId());
-		if(x > 0) {
-			substraction = 1;
-		}else if(x < 0) {
-			substraction = -1;
-		}
-		return substraction;
-	}
-	
-
-
-//	public void addEmploy(Employee em) throws RepetitiveException {
-//		if(compareTo(em)==0) {
-//			throw new RepetitiveException("Este empleado ya existe!");
-//		}else if(compareTo(em)>0) {
-//			if(izq==null) {
-//				izq = em;
-//			}else {
-//				izq.addEmploy(em);
-//			}
-//		}else {
-//			if(der==null) {
-//				der = em;
-//			}else {
-//				der.addEmploy(em);
-//			}
+//	@Override
+//	public int compareTo(Employee em) {
+//		int substraction = 0;
+//		double x = this.getId().compareTo(em.getId());
+//		if(x > 0) {
+//			substraction = 1;
+//		}else if(x < 0) {
+//			substraction = -1;
 //		}
+//		return substraction;
 //	}
 	
 	
-	public void addClient(String name, String id) {
-		Client c = new Client (name, id,false);
+	public void addClient(String name, String id,String phone) {
+		Client c = new Client (name, id,phone,false);
 		clients.add(c);
 	}
 	
 
+	public String inOrder() {
+	    String leftS; String rightS;
+	    if (izq != null)
+	       leftS = izq.inOrder();
+	    else
+	       leftS = "";
+	    if (der != null)
+	       rightS = der.inOrder();
+	    else
+	       rightS = "";
+	    return leftS + " " +name +  rightS ;
+	}
+
+	public String posOrder(Employee node) {
+	    String returnString = "";
+	    if (node != null) {
+	        returnString += posOrder(node.getIzq());
+	        returnString += posOrder(node.getDer())+" ";
+	        returnString += node.getName();
+	    }
+	    return returnString;
+	}
+	
+	public ArrayList<Employee> posOrder2(Employee node,ArrayList<Employee>arr) {
+	    if (node != null) {
+	        posOrder2(node.getIzq(),arr);
+	        posOrder2(node.getDer(),arr);
+	        arr.add( node);
+	    }
+	    return arr;
+	}
+	
+	
+	public String preOrder(Employee node) {
+	    String returnString = "";
+	    if (node != null) {
+	    	returnString += node.getName();
+	        returnString += preOrder(node.getIzq());
+	        returnString += preOrder(node.getDer())+" ";
+	        
+	    }
+	    return returnString;
+	}
+	
+	public  ArrayList<Employee> preOrder2(Employee node,ArrayList<Employee>arr) {
+		 if (node != null) {
+			 	arr.add( node);
+		        preOrder2(node.getIzq(),arr);
+		        preOrder2(node.getDer(),arr);
+		        
+		    }
+		    return arr;
+	}
+	public  ArrayList<Employee> inOrder2(Employee node,ArrayList<Employee>arr) {
+		 if (node != null) {
+			 	
+		        preOrder2(node.getIzq(),arr);
+		        arr.add( node);
+		        preOrder2(node.getDer(),arr);
+		        
+		    }
+		    return arr;
+	}
+	/**
+	 * @return the numClients
+	 */
+	public int getNumClients() {
+		numClients = num();
+		return numClients;
+	}
+
+	
+	public int num() {
+		int cosa=0;
+		for (int i = 0; i < clients.size(); i++) {
+			cosa++;
+		}
+		return cosa;
+	}
+	/**
+	 * @param numClients the numClients to set
+	 */
+	public void setNumClients(int numClients) {
+		this.numClients = numClients;
+	}
+	
 
 	
 	
+
 	
 }

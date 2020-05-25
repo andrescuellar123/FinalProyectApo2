@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Label text=" Product for your Client" textFill="#e10303" BorderPane.alignment="CENTER">
@@ -19,14 +18,16 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="162.0" layoutY="49.0" text="Name of Product:" />
+            <Label layoutX="178.0" layoutY="49.0" text="Name of Product:" />
             <TextField fx:id="Prname" layoutX="343.0" layoutY="45.0" />
-            <TextField fx:id="Prcost" layoutX="343.0" layoutY="126.0" />
-            <Label layoutX="209.0" layoutY="130.0" text="Cost:" />
+            <TextField fx:id="Prcost" layoutX="343.0" layoutY="97.0" />
+            <Label layoutX="242.0" layoutY="101.0" text="Cost:" />
             <Button layoutX="355.0" layoutY="258.0" mnemonicParsing="false" onAction="#AddProduct" text="Add Product" />
             <Label fx:id="PrResponse" layoutX="195.0" layoutY="241.0" />
-            <Label layoutX="171.0" layoutY="202.0" text="The id of the client:" />
-            <TextField fx:id="PrId" layoutX="343.0" layoutY="198.0" />
+            <Label layoutX="174.0" layoutY="154.0" text="The id of the client:" />
+            <TextField fx:id="PrId" layoutX="343.0" layoutY="150.0" />
+            <Label layoutX="55.0" layoutY="212.0" text="The id of the employee that is attending:" />
+            <TextField fx:id="PrEmployeeId" layoutX="343.0" layoutY="200.0" />
          </children>
       </Pane>
    </center>

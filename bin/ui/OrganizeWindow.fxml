@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <Pane prefHeight="400.0" prefWidth="622.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="94.0" layoutY="79.0" mnemonicParsing="false" onAction="#InorderButton" prefHeight="25.0" prefWidth="72.0" text="Inorder" />
+            <Button layoutX="94.0" layoutY="160.0" mnemonicParsing="false" onAction="#PosOrderButton" text="PosOrder" />
+            <Button layoutX="95.0" layoutY="235.0" mnemonicParsing="false" onAction="#PreOrderButton" text="PreOrder" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="51.0" layoutX="291.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="139.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="51.0" layoutX="430.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="139.0" />
+            <Rectangle fx:id="CuadradoNames" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="291.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
+            <Rectangle fx:id="CuadradoIds" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="430.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
+            <Label layoutX="331.0" layoutY="51.0" text="The Names" />
+            <Label layoutX="470.0" layoutY="51.0" text="The Identities" />
+            <Label fx:id="NamesOrder" alignment="TOP_CENTER" layoutX="317.0" layoutY="104.0" prefHeight="177.0" prefWidth="90.0" text="Label" textAlignment="CENTER" />
+            <Label fx:id="IdsOrder" layoutX="461.0" layoutY="104.0" prefHeight="17.0" prefWidth="90.0" text="Label" />
+         </children>
+      </Pane>
+   </right>
+</BorderPane>

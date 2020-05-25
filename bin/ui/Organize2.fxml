@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <TableView fx:id="NamesTv" prefHeight="400.0" prefWidth="329.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="NamesTc" prefWidth="161.0" text="Names Employee" />
+            <TableColumn fx:id="IdTc" prefWidth="167.0" text="Id Employee" />
+        </columns>
+      </TableView>
+   </left>
+   <center>
+      <Pane prefHeight="400.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="60.0" layoutY="134.0" mnemonicParsing="false" onAction="#posOrder" style="-fx-background-color: #0000FF;" text="PosOrder" textFill="WHITE" />
+            <Button layoutX="176.0" layoutY="134.0" mnemonicParsing="false" onAction="#preOrder" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #0000FF;" text="PreOrder" textFill="WHITE" />
+            <Button layoutX="60.0" layoutY="200.0" mnemonicParsing="false" onAction="#Inorder" prefHeight="25.0" prefWidth="68.0" style="-fx-background-color: #0000FF;" text="Inorder" textFill="WHITE" />
+            <Label fx:id="CATEGORY" layoutX="14.0" layoutY="55.0" text="Whats your critery to order the Tree?" textFill="#ff0707">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button layoutX="177.0" layoutY="200.0" mnemonicParsing="false" onAction="#IdOrd" prefHeight="25.0" prefWidth="78.0" style="-fx-background-color: #0000FF;" text="By Id" textFill="WHITE" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

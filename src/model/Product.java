@@ -3,6 +3,7 @@ package model;
 public class Product {
 	private String name;
 	private double cost;
+
 	/**
 	 * @param name
 	 * @param cost
