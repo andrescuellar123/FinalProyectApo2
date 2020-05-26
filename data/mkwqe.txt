@@ -1,0 +1,8 @@
+ PosOrder :  ewq ewq
+ PreOrder : ewq ewq   
+ inOrder : the name of the employee is: ewq with this amount of clients: 4 the name of the employee is: ewq with this amount of clients: 0 
+the clients in the list are : wqe 
+the clients in the ArrayList are : wqe 
+the clients and the total amount:  
+wqe : 1224.0
+ 

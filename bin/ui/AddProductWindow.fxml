@@ -22,8 +22,8 @@
             <TextField fx:id="Prname" layoutX="343.0" layoutY="45.0" />
             <TextField fx:id="Prcost" layoutX="343.0" layoutY="97.0" />
             <Label layoutX="242.0" layoutY="101.0" text="Cost:" textFill="#e10303" />
-            <Button layoutX="355.0" layoutY="258.0" mnemonicParsing="false" onAction="#AddProduct" style="-fx-background-color: #0000FF;" text="Add Product" textFill="WHITE" />
-            <Label fx:id="PrResponse" layoutX="150.0" layoutY="267.0" prefHeight="33.0" prefWidth="17.0" />
+            <Button layoutX="450.0" layoutY="271.0" mnemonicParsing="false" onAction="#AddProduct" style="-fx-background-color: #0000FF;" text="Add Product" textFill="WHITE" />
+            <Label fx:id="PrResponse" layoutX="110.0" layoutY="267.0" prefHeight="33.0" prefWidth="291.0" />
             <Label layoutX="174.0" layoutY="154.0" text="The id of the client:" textFill="#e10303" />
             <TextField fx:id="PrId" layoutX="343.0" layoutY="150.0" />
             <Label layoutX="60.0" layoutY="204.0" text="The id of the employee that is attending:" textFill="#e10303" />

@@ -48,9 +48,9 @@
                   <MenuItem mnemonicParsing="false" onAction="#BetterEmployeeWindow" text="The Employee of the month" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="WriteData">
+            <Menu mnemonicParsing="false" text="Write Data">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#writeDataWindow" text="Action 1" />
+                <MenuItem mnemonicParsing="false" onAction="#writeDataWindow" text="Write a file" />
               </items>
             </Menu>
         </menus>

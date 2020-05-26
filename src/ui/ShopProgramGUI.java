@@ -27,6 +27,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.*;
 public class ShopProgramGUI implements Initializable{
@@ -323,11 +324,10 @@ public class ShopProgramGUI implements Initializable{
 			x = shop.findClient(id);
 
 
-			//shop.searchEmployee(idEmployee).addClient(x.getName(),x.getId(),x.getPhone());
-			//+" Employee " +y.getName()
+		
 			y = shop.searchEmployee(idEmployee);
 			shop.addClientToEmployee(idEmployee, x.getId(), x.getName(), x.getPhone());
-			PrResponse.setText("Client name is: "+x.getName()+" and bought this: "+ x.getProd().get(x.getProd().size()-1).getName());
+			PrResponse.setText("Client name is: "+x.getName()+" and bought: "+ x.getProd().get(x.getProd().size()-1).getName());
 			Prname.clear();
 			PrId.clear();
 			Prcost.clear();
@@ -355,16 +355,7 @@ public class ShopProgramGUI implements Initializable{
 	
 		 }
 
-//	public void initialize() {
-//		shop = new ShopProgram();
-//		new WindmillThread(shop, this).start();
-//		new ImageAppearThread(shop, this).start();
-//		new ImageDisappearThread(shop, this).start();
-//		shop.addSquares(RectaNegro1.getRotate());
-//		shop.addSquares(RectaNegro2.getRotate());
-//		shop.addSquares(RectaAmarillo1.getRotate());
-//		shop.addSquares(RectaAmarillo2.getRotate());
-//	}
+
 	private void initializeTable(){
 		ObservableList<Client> observableList ;
 		observableList = FXCollections.observableArrayList(shop.getNa());
@@ -539,6 +530,8 @@ public class ShopProgramGUI implements Initializable{
     	indication.setVisible(false);
     	shop.writteData(nameData);
     	DIRECTIONIMG.setVisible(true);
+    	 Color c = Color.RED;
+    	resp.setTextFill(c);
     	resp.setText("To know where is the report check out the folder in the image");
     	}
     	catch(FileNotFoundException e) {
