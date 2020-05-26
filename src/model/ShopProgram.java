@@ -1,17 +1,14 @@
 package model;
 
-import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 
 public class ShopProgram {
 
@@ -63,7 +60,19 @@ public class ShopProgram {
 	}
 
 
+	/**
+	 * @return the first
+	 */
+	public Client getFirst() {
+		return first;
+	}
 
+	/**
+	 * @param first the first to set
+	 */
+	public void setFirst(Client first) {
+		this.first = first;
+	}
 
 	/**
 	 * @return the na
@@ -130,22 +139,10 @@ public class ShopProgram {
 	}
 
 
-	public void sh() {
-		orderById();
-		for (int i = 0; i <= na2.size()-1; i++) {
-			System.out.println(na2.get(i).getName() +" "+na2.get(i).getId());
-		}
-	}
 
-	public String inOrderName(Employee node) {
-		String returnString = node.inOrder(node);
-		
-		return returnString;
-	}
 
-//	public String inOrder(Employee raiz) {
-//		return raiz.inOrder();
-//	}
+
+
 	public String posOrder(Employee raiz) throws EmployeeNullException  {
 		String posOrder="";
 		if(raiz != null) {
@@ -238,12 +235,6 @@ public class ShopProgram {
 		return arr;
 	}
 
-	public void sh2() {
-		ArrayList<Employee> arr=orderById();
-		for (int i = 0; i < arr.size(); i++) {
-			System.out.println(arr.get(i).getName()+i);
-		}
-	}
 
 
 	public void addClientToEmployee(String id, String idClient,String name,String phone) {
@@ -270,10 +261,7 @@ public class ShopProgram {
 	}
 	
 	
-	public String[] getArrPosOrder() {
-		String [] arrPosOrder= empleadoRaiz.posOrder(empleadoRaiz).split(" ");
-		return arrPosOrder;
-	}
+
 	
 	public ArrayList<Employee> getPosOrder()throws  EmployeeNullException{
 		ArrayList<Employee>arr = new ArrayList<>();
@@ -342,7 +330,7 @@ public class ShopProgram {
 
 
 
-	public String ShowClients() {
+	public String ShowClients() throws ClientNullException{
 		String msg = "";
 		if(first != null) {
 			Client act = first;
@@ -355,14 +343,21 @@ public class ShopProgram {
 			} 
 
 		}
+		else {
+			throw new ClientNullException("weq");
+		}
+		
 		return msg;
 	}
 	public String ShowClients2() {
 		String msg ="";
 		ArrayList <Client>ar=getNa();
+		
 		for (int i = 0; i < ar.size(); i++) {
 			msg += ar.get(i).getName()+" ";
 		}
+		
+		
 		return msg;
 
 	}
@@ -428,17 +423,6 @@ public class ShopProgram {
 
 
 
-//		public String[] names (){
-//			String[] ar = ShowClients().split(" ");
-//			return ar;
-//			
-//		}
-//		public String[] ids() {
-//			String[] ar = ShowClients2().split(" ");
-//			return ar;
-//		}
-
-
 
 		//Threads
 		
@@ -457,12 +441,12 @@ public class ShopProgram {
 		this.spin = spin;
 	}
 
-	public void addSquares(double n) {
+	public void addWindMill(double n) {
 	Windmill s=	new Windmill(n);
 		wind.add(s);
 	}
 	
-	public void rotateSquares() {
+	public void rotateWindmill() {
 		for (Windmill s: wind) {
 			s.rotate();
 		}
@@ -495,9 +479,6 @@ public class ShopProgram {
 		
 		String clientList = ShowClients();
 		String clientsArraylist= ShowClients2();
-		if(clientsArraylist == null && clientList == null) {
-			throw new ClientNullException("The Client Doesnt Exist!"); 
-		}
 		
 		bw.write("the clients in the list are : "+clientList +"\n");
 		bw.write("the clients in the ArrayList are : "+clientsArraylist +"\n");

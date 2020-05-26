@@ -235,7 +235,7 @@ public class ShopProgramGUI implements Initializable{
 	@FXML
 	void OrganizeWindow(ActionEvent event) throws IOException {
 		shop.setSpin(false);
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Organize2.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrganizeWindow.fxml"));
 
 		fxmlLoader.setController(this);    	
 		Parent pa2 = (Parent)fxmlLoader.load();
@@ -346,10 +346,10 @@ public class ShopProgramGUI implements Initializable{
 				new WindmillThread(shop, this).start();
 				new ImageAppearThread(shop, this).start();
 				new ImageDisappearThread(shop, this).start();
-				shop.addSquares(RectaNegro1.getRotate());
-				shop.addSquares(RectaNegro2.getRotate());
-				shop.addSquares(RectaAmarillo1.getRotate());
-				shop.addSquares(RectaAmarillo2.getRotate());
+				shop.addWindMill(RectaNegro1.getRotate());
+				shop.addWindMill(RectaNegro2.getRotate());
+				shop.addWindMill(RectaAmarillo1.getRotate());
+				shop.addWindMill(RectaAmarillo2.getRotate());
 			 
 				
 	
@@ -389,7 +389,7 @@ public class ShopProgramGUI implements Initializable{
 		}catch(NullPointerException e) {
 			System.out.println("there is no many employees to know "
 					+ "who is the emloyee of the month (at least two) ");
-			System.out.println("Or thre is not sells registered in the program");
+			System.out.println("Or there is not sells registered in the program");
 		}
 	}
 

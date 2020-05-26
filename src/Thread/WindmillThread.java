@@ -16,7 +16,7 @@ public class WindmillThread  extends Thread{
 	public void run() {
 		while(shopProgram.isSpin()) {
 			
-			shopProgram.rotateSquares();
+			shopProgram.rotateWindmill();
 			
 			Platform.runLater(new Thread() {
 				public void run() {
