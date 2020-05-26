@@ -118,7 +118,7 @@ import model.*
 		setup1();
 		sh.addCliente("pipe", "777", "123345");
 		sh.addCliente("pp", "100", "123345");
-		sh.ShowClients2();
+
 		assertTrue(sh.findBinaryClient("123").getName().equals("Pepe"));
 		assertTrue(sh.findBinaryClient("1234").getName().equals("lolo"));
 		assertTrue(sh.findBinaryClient("777").getName().equals("pipe"));

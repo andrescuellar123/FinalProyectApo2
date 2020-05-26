@@ -85,17 +85,15 @@ public class Employee extends Human{
 	}
 	
 
-	public String inOrder() {
-	    String leftS; String rightS;
-	    if (izq != null)
-	       leftS = izq.inOrder();
-	    else
-	       leftS = "";
-	    if (der != null)
-	       rightS = der.inOrder();
-	    else
-	       rightS = "";
-	    return leftS + " " +name +  rightS ;
+	public String inOrder(Employee node) {
+	    String returnString = "";
+	    if (node != null) {
+	        returnString += inOrder(node.getIzq());
+	        returnString += node.getName();
+	        returnString += inOrder(node.getDer())+" ";
+	        
+	    }
+	    return returnString;
 	}
 
 	public String posOrder(Employee node) {
@@ -105,6 +103,7 @@ public class Employee extends Human{
 	        returnString += posOrder(node.getDer())+" ";
 	        returnString += node.getName();
 	    }
+	  
 	    return returnString;
 	}
 	

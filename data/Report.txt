@@ -1,0 +1,4 @@
+ PosOrder :  qw 2 1
+ PreOrder : 12qw   
+ inOrder : 1 2 qw the clients in the list are : 1 
+the clients in the ArrayList are : 1 

@@ -1,7 +1,14 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +19,8 @@ public class ShopProgram {
 	private Client first;
 	private ArrayList<Client> na ;
 	public ArrayList<Employee> na2 ;
-
+	private List<Windmill> wind;
+	private boolean spin;
 	/**
 	 * @param empleadoRaiz
 	 * @param first
@@ -22,6 +30,8 @@ public class ShopProgram {
 		this.first = first;
 		na = new ArrayList<Client>();
 		na2 = new ArrayList<Employee>();
+		wind = new ArrayList<Windmill>();
+		spin = true;
 	}
 
 	public String getNameEmployee() {
@@ -128,13 +138,8 @@ public class ShopProgram {
 	}
 
 	public String inOrderName(Employee node) {
-		String returnString = "";
-		if (node != null) {
-			returnString += " "+ inOrderName(node.getIzq());
-			returnString += node.getName();
-			returnString += inOrderName(node.getDer()) + " ";
-
-		}
+		String returnString = node.inOrder(node);
+		
 		return returnString;
 	}
 
@@ -332,11 +337,13 @@ public class ShopProgram {
 		}
 		return msg;
 	}
-	public void ShowClients2() {
+	public String ShowClients2() {
+		String msg ="";
 		ArrayList <Client>ar=getNa();
 		for (int i = 0; i < ar.size(); i++) {
-			System.out.println(ar.get(i).getName()+" "+ i);
+			msg += ar.get(i).getName()+" ";
 		}
+		return msg;
 
 	}
 
@@ -413,5 +420,65 @@ public class ShopProgram {
 
 
 
+		//Threads
+		
+	public List<Windmill> getWindmill() {
+		return wind;
+	}
 
+
+
+	public boolean isSpin() {
+		return spin;
+	}
+
+
+	public void setSpin(boolean spin) {
+		this.spin = spin;
+	}
+
+	public void addSquares(double n) {
+	Windmill s=	new Windmill(n);
+		wind.add(s);
+	}
+	
+	public void rotateSquares() {
+		for (Windmill s: wind) {
+			s.rotate();
+		}
+	}
+	
+	
+	
+	//writing data
+	
+	
+	public void writteData() throws IOException,ClientNullException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter("data/Report.txt"));
+		
+		//Employees
+		
+		String pos = " PosOrder : " + posOrder(empleadoRaiz)+ "\n";
+		String pre = " PreOrder : " + preOrder(empleadoRaiz)+ "\n";
+		ArrayList<Employee>emp = getInOrder();
+	
+		bw.write(pos);
+		bw.write(pre);
+		bw.write(" inOrder : ");
+		for (int i = 0; i < emp.size(); i++) {
+			bw.write(emp.get(i).getName() +" " );
+		}
+		bw.write("\n");
+		//Clients
+		
+		
+		String clientList = ShowClients();
+		String clientsArraylist= ShowClients2();
+		
+		
+		bw.write("the clients in the list are : "+clientList +"\n");
+		bw.write("the clients in the ArrayList are : "+clientsArraylist +"\n");
+		
+		bw.close();
+	}
 }

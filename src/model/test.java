@@ -1,10 +1,11 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class test {
 	
-	public static void main(String[] args) throws RepetitiveException {
+	public static void main(String[] args) throws RepetitiveException, IOException, ClientNullException, EmployeeNullException {
 		
 		ShopProgram sh = new ShopProgram();
 		sh.addCliente("weqe", "2","22222");
@@ -23,8 +24,11 @@ public class test {
 		sh.addHumanTree("pipo1", "1","5555");
 //		sh.addHumanTree("pipo", "2","5555");
 
-		sh.ShowClients2();
-		System.out.println(sh.findBinaryEmployee("1").getName()+"xdxd");
+		System.out.println(sh.ShowClients2());
+		System.out.println(sh.getEmpleadoRaiz().getId());
+		sh.writteData();
+		System.out.println("////////inordepocho////");
+		System.out.println(sh.inOrderName(sh.getEmpleadoRaiz()));
 //		
 //		sh.addClientToEmployee("1", "2", "weqe", "22222");
 //		sh.addClientToEmployee("2", "3", "weqe", "22222");

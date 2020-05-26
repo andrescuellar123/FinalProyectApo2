@@ -2,8 +2,12 @@ package ui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import Thread.ImageAppearThread;
+import Thread.ImageDisappearThread;
+import Thread.WindmillThread;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,10 +24,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import model.*;
-public class ShopProgramGUI implements Initializable{
+public class ShopProgramGUI implements Initializable {
 	private ShopProgram shop;
 
 	@FXML
@@ -142,284 +147,359 @@ public class ShopProgramGUI implements Initializable{
 	private Rectangle CuadradoIds;
 
 
-    @FXML
-    private TableColumn<Employee, String> IdTc;
+	@FXML
+	private TableColumn<Employee, String> IdTc;
 
 
-    @FXML
-    private Label CATEGORY;
+	@FXML
+	private Label CATEGORY;
+
+
+
+
+	@FXML
+	private Rectangle RectaNegro1;
+
+	@FXML
+	private Rectangle RectaNegro2;
+
+	@FXML
+	private Rectangle RectaAmarillo1;
+	@FXML
+	private Rectangle RectaAmarillo2;
+
+
+	@FXML
+	public ImageView APPEARDISA;
 
 	/**
 	 * @param shop
 	 */
-	 public ShopProgramGUI(ShopProgram shops) {
-		 shop = shops;
-	 }
+	public ShopProgramGUI(ShopProgram shops) {
+		shop = shops;
+	}
 
-	 @FXML
-	 void AddProductWindow(ActionEvent event) throws IOException {
-		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddProductWindow.fxml"));
+	@FXML
+	void AddProductWindow(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddProductWindow.fxml"));
 
-		 fxmlLoader.setController(this);    	
-		 Parent pa4 = (Parent)fxmlLoader.load();
-		 mainPanel.getChildren().clear();
-		 mainPanel.setTop(pa4);
-
-
-	 }
-
-	 @FXML
-	 void BetterEmployeeWindow(ActionEvent event) throws IOException {
-		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BetterEmployeeWindow.fxml"));
-
-		 fxmlLoader.setController(this);    	
-		 Parent pa6 = (Parent)fxmlLoader.load();
-		 mainPanel.getChildren().clear();
-		 mainPanel.setTop(pa6);
-		 initializeEmployeeOfTheMonth();
-	 }
-
-	 @FXML
-	 public void ListWindow(ActionEvent event) throws IOException {
-		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ListWindow.fxml"));
-
-		 fxmlLoader.setController(this);    	
-		 Parent pa5 = (Parent)fxmlLoader.load();
-		 mainPanel.getChildren().clear();
-		 mainPanel.setTop(pa5);
-		 initializeTable();
+		fxmlLoader.setController(this);    	
+		Parent pa4 = (Parent)fxmlLoader.load();
+		mainPanel.getChildren().clear();
+		mainPanel.setTop(pa4);
 
 
-	 }
+	}
 
-	 @FXML
-	 void OrganizeWindow(ActionEvent event) throws IOException {
-		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Organize2.fxml"));
+	@FXML
+	void BetterEmployeeWindow(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BetterEmployeeWindow.fxml"));
 
-		 fxmlLoader.setController(this);    	
-		 Parent pa2 = (Parent)fxmlLoader.load();
-		 mainPanel.getChildren().clear();
-		 mainPanel.setTop(pa2);
+		fxmlLoader.setController(this);    	
+		Parent pa6 = (Parent)fxmlLoader.load();
+		mainPanel.getChildren().clear();
+		mainPanel.setTop(pa6);
+		initializeEmployeeOfTheMonth();
+	}
 
-	 }
+	@FXML
+	public void ListWindow(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ListWindow.fxml"));
 
-	 @FXML
-	 public void RegisterWindow(ActionEvent event) throws IOException {
-		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RegisterWindow.fxml"));
-
-		 fxmlLoader.setController(this);    	
-		 Parent pa1 = (Parent)fxmlLoader.load();
-		 mainPanel.getChildren().clear();
-		 mainPanel.setTop(pa1);
-	 }
-
-
-	 @FXML
-	 public void SearchWindow(ActionEvent event) throws IOException {
-		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SearchWindow.fxml"));
-
-		 fxmlLoader.setController(this);    	
-		 Parent pa3 = (Parent)fxmlLoader.load();
-		 mainPanel.getChildren().clear();
-		 mainPanel.setTop(pa3);
-	 }
-
-	 @FXML
-	 void AddPerson(ActionEvent event) throws RepetitiveException {
-		 String name = nameTxt.getText();
-		 String id = idTxt.getText();
-		 String phone = phTxt1.getText();
-
-		 if(TrueB.isSelected()) {
-
-			 shop.addHumanTree(name, id, phone);
-			 addresponse.setText("you have create a Employee");
-			 y = new Employee(name, id, phone,true);
-			 String r = y.getName();
-			 th.setText(r);
-			 nameTxt.clear();
-			 idTxt.clear();
-		 }
-		 else if(FalseB.isSelected()) {
-
-			 shop.addCliente(name, id,phone);
-			 addresponse.setText("you have create a Client");
-			 String r = shop.findClient(id).getName();
-			 th.setText(r);
-			 nameTxt.clear();
-			 idTxt.clear();
-		 }
-
-	 }
-
-	 @FXML
-	 void AddProduct(ActionEvent event) {
-		 try {
-			 String name = Prname.getText();
-			 double cost = Double.parseDouble(Prcost.getText());
-			 String id = PrId.getText();
-			 Product p = new Product (name,cost);
-
-			 shop.findClient(id).addProducto(p);
-
-			 String idEmployee = PrEmployeeId.getText();
-			 x = shop.findClient(id);
+		fxmlLoader.setController(this);    	
+		Parent pa5 = (Parent)fxmlLoader.load();
+		mainPanel.getChildren().clear();
+		mainPanel.setTop(pa5);
+		initializeTable();
 
 
-			 //shop.searchEmployee(idEmployee).addClient(x.getName(),x.getId(),x.getPhone());
-			 //+" Employee " +y.getName()
-			 y = shop.searchEmployee(idEmployee);
-			 shop.addClientToEmployee(idEmployee, x.getId(), x.getName(), x.getPhone());
-			 PrResponse.setText(x.getName()+" "+ x.getProd().get(x.getProd().size()-1).getName());
-		 }catch(NullPointerException e) {
-			 System.out.println("We didnt find the person (dont exisist in the system)");
-		 }
-	 }
+	}
 
-	 @Override
-	 public void initialize(URL location, ResourceBundle resources) {
+	@FXML
+	void OrganizeWindow(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Organize2.fxml"));
 
-		 
+		fxmlLoader.setController(this);    	
+		Parent pa2 = (Parent)fxmlLoader.load();
+		mainPanel.getChildren().clear();
+		mainPanel.setTop(pa2);
 
+	}
 
-	 }
-	 private void initializeTable(){
-		 ObservableList<Client> observableList ;
-		 observableList = FXCollections.observableArrayList(shop.getNa());
+	@FXML
+	public void RegisterWindow(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RegisterWindow.fxml"));
 
-		 ObservableList<Employee> observableList2 ;
-		 observableList2 = FXCollections.observableArrayList(shop.getNa2(shop.getEmpleadoRaiz()));
-
-		 tcV1.setItems(observableList);
-
-		 NameClients1.setCellValueFactory(new PropertyValueFactory<Client,String>("name"));
-		 idClients1.setCellValueFactory(new PropertyValueFactory<Client,String>("id"));
-		 totalProducts.setCellValueFactory(new PropertyValueFactory<Client,Double>("total"));
-
-		 tcVEmployees.setItems(observableList2);
-		 NameEmployees.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
-		 idEmployees.setCellValueFactory(new PropertyValueFactory<Employee,String>("id"));
-		 totalCients.setCellValueFactory(new PropertyValueFactory<Employee,Integer>("numClients"));
-
-	 }
-
-	 private void initializeEmployeeOfTheMonth() {
-		 try {
-			 shop.orderByIdEmployeeMenorToBig();
-			 shop.searchEmployee(shop.getEmpleadoRaiz().getId());
-			 Employee f = shop.findingTheEmployeeOfTheMonth();
-			 EmployeeMonthTotal.setText(""+f.getNumClients());
-
-			 employeeMonthName.setText(f.getName());
-		 
-		 }catch(NullPointerException e) {
-			 System.out.println("there is no many employees to know "
-					 + "who is the emloyee of the month (at least two)");
-		 }
-	 }
+		fxmlLoader.setController(this);    	
+		Parent pa1 = (Parent)fxmlLoader.load();
+		mainPanel.getChildren().clear();
+		mainPanel.setTop(pa1);
+	}
 
 
-	 @FXML
-	 void binaryType(ActionEvent event) {
-		 try {
-			 String id = idToSearch.getText();
-			 TypeOfSearchLB.setText("Binary");
-			 if(clientOfSearchB.isSelected()) {
-				 Client searched = shop.findBinaryClient(id);
-				 NameOfSearchLB.setText(searched.getName());
-				 idOfSearchLB.setText(searched.getId());
-				 phoneOfSearchLB.setText(searched.getPhone());
-			 }
-			 if(employeeOfSearchB.isSelected()) {
-				 Employee searched = shop.findBinaryEmployee(id);
-				 NameOfSearchLB.setText(searched.getName());
-				 idOfSearchLB.setText(searched.getId());
-				 phoneOfSearchLB.setText(searched.getPhone());
-				 shop.orderByIdEmployeeMenorToBig();
-			 }
-		 }catch(NullPointerException e) {
-			 System.out.println("We didnt find the person (maybe is the other type "
-					 + "of peroson or just dont exisist in the system) or the numeber of employees its not pair");
-		 }
-	 }
+	@FXML
+	public void SearchWindow(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SearchWindow.fxml"));
 
-	 @FXML
-	 void tradicionalType(ActionEvent event) {
-		 try {
-			 String id = idToSearch.getText();
-			 TypeOfSearchLB.setText("Tradicional");
-			 if(clientOfSearchB.isSelected()) {
-				 Client searched = shop.findClient(id);
-				 NameOfSearchLB.setText(searched.getName());
-				 idOfSearchLB.setText(searched.getId());
-				 phoneOfSearchLB.setText(searched.getPhone());
-			 }
-			 if(employeeOfSearchB.isSelected()) {
-				 Employee searched = shop.searchEmployee(id);
-				 NameOfSearchLB.setText(searched.getName());
-				 idOfSearchLB.setText(searched.getId());
-				 phoneOfSearchLB.setText(searched.getPhone());
-			 }
-		 }catch(NullPointerException e) {
-			 System.out.println("We didnt find the person (maybe is the other type "
-					 + "of peroson or just dont exisist in the system)");
-		 }
-	 }
+		fxmlLoader.setController(this);    	
+		Parent pa3 = (Parent)fxmlLoader.load();
+		mainPanel.getChildren().clear();
+		mainPanel.setTop(pa3);
+	}
+		
+    @FXML
+    void writeDataWindow(ActionEvent event) throws IOException {
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WriteDataWindow.fxml"));
 
+		fxmlLoader.setController(this);    	
+		Parent pa7 = (Parent)fxmlLoader.load();
+		mainPanel.getChildren().clear();
+		mainPanel.setTop(pa7);
+    }
+	@FXML
+	void AddPerson(ActionEvent event) throws RepetitiveException {
+		String name = nameTxt.getText();
+		String id = idTxt.getText();
+		String phone = phTxt1.getText();
 
+		if(TrueB.isSelected()) {
 
-	 @FXML
-	 void posOrder(ActionEvent event) {
-		 ObservableList<Employee> observableList2 ;
-		 observableList2 = FXCollections.observableArrayList(shop.getPosOrder());
+			shop.addHumanTree(name, id, phone);
+			addresponse.setText("you have create a Employee");
+			y = new Employee(name, id, phone,true);
+			String r = y.getName();
+			th.setText(r);
+			nameTxt.clear();
+			idTxt.clear();
+		}
+		else if(FalseB.isSelected()) {
 
-		 NamesTv.setItems(observableList2);
+			shop.addCliente(name, id,phone);
+			addresponse.setText("you have create a Client");
+			String r = shop.findClient(id).getName();
+			th.setText(r);
+			nameTxt.clear();
+			idTxt.clear();
+		}
 
+	}
 
-		 NamesTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
-		 IdTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("id"));
-		 CATEGORY.setText("You choose to organize : POSTORDER");
+	@FXML
+	void AddProduct(ActionEvent event) {
+		try {
+			String name = Prname.getText();
+			double cost = Double.parseDouble(Prcost.getText());
+			String id = PrId.getText();
+			Product p = new Product (name,cost);
 
-	 }
+			shop.findClient(id).addProducto(p);
 
-	    @FXML
-	    void preOrder(ActionEvent event) {
-	    	 ObservableList<Employee> observableList2 ;
-			 observableList2 = FXCollections.observableArrayList(shop.getPreOrder());
-
-			 NamesTv.setItems(observableList2);
+			String idEmployee = PrEmployeeId.getText();
+			x = shop.findClient(id);
 
 
-			 NamesTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
-			 IdTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("id"));
-			 CATEGORY.setText("You choose to organize : PREORDER");
-	    }
-	    
-	    @FXML
-	    void Inorder(ActionEvent event) {
-	    	 ObservableList<Employee> observableList2 ;
-				 observableList2 = FXCollections.observableArrayList(shop.getInOrder());
+			//shop.searchEmployee(idEmployee).addClient(x.getName(),x.getId(),x.getPhone());
+			//+" Employee " +y.getName()
+			y = shop.searchEmployee(idEmployee);
+			shop.addClientToEmployee(idEmployee, x.getId(), x.getName(), x.getPhone());
+			PrResponse.setText(x.getName()+" "+ x.getProd().get(x.getProd().size()-1).getName());
+		}catch(NullPointerException e) {
+			System.out.println("We didnt find the person (dont exisist in the system)");
+		}
+	}
 
-				 NamesTv.setItems(observableList2);
-
-
-				 NamesTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
-				 IdTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("id"));
-				 CATEGORY.setText("You choose to organize : INORDER");
-	    }
-	    
-
-	    @FXML
-	    void IdOrd(ActionEvent event) {
-	    	 ObservableList<Employee> observableList2 ;
-			 observableList2 = FXCollections.observableArrayList(shop.orderByIdEmployeeMenorToBig());
-
-			 NamesTv.setItems(observableList2);
-
-
-			 NamesTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
-			 IdTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("id"));
+		 @Override
+		 public void initialize(URL location, ResourceBundle resources) {
+	
 			 
-			 CATEGORY.setText("You choose to organize : MAYOR ID");
-	    }
+				shop = new ShopProgram();
+				new WindmillThread(shop, this).start();
+				new ImageAppearThread(shop, this).start();
+				new ImageDisappearThread(shop, this).start();
+				shop.addSquares(RectaNegro1.getRotate());
+				shop.addSquares(RectaNegro2.getRotate());
+				shop.addSquares(RectaAmarillo1.getRotate());
+				shop.addSquares(RectaAmarillo2.getRotate());
+	
+		 }
+
+//	public void initialize() {
+//		shop = new ShopProgram();
+//		new WindmillThread(shop, this).start();
+//		new ImageAppearThread(shop, this).start();
+//		new ImageDisappearThread(shop, this).start();
+//		shop.addSquares(RectaNegro1.getRotate());
+//		shop.addSquares(RectaNegro2.getRotate());
+//		shop.addSquares(RectaAmarillo1.getRotate());
+//		shop.addSquares(RectaAmarillo2.getRotate());
+//	}
+	private void initializeTable(){
+		ObservableList<Client> observableList ;
+		observableList = FXCollections.observableArrayList(shop.getNa());
+
+		ObservableList<Employee> observableList2 ;
+		observableList2 = FXCollections.observableArrayList(shop.getNa2(shop.getEmpleadoRaiz()));
+
+		tcV1.setItems(observableList);
+
+		NameClients1.setCellValueFactory(new PropertyValueFactory<Client,String>("name"));
+		idClients1.setCellValueFactory(new PropertyValueFactory<Client,String>("id"));
+		totalProducts.setCellValueFactory(new PropertyValueFactory<Client,Double>("total"));
+
+		tcVEmployees.setItems(observableList2);
+		NameEmployees.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
+		idEmployees.setCellValueFactory(new PropertyValueFactory<Employee,String>("id"));
+		totalCients.setCellValueFactory(new PropertyValueFactory<Employee,Integer>("numClients"));
+
+	}
+
+	private void initializeEmployeeOfTheMonth() {
+		try {
+			shop.orderByIdEmployeeMenorToBig();
+			shop.searchEmployee(shop.getEmpleadoRaiz().getId());
+			Employee f = shop.findingTheEmployeeOfTheMonth();
+			EmployeeMonthTotal.setText(""+f.getNumClients());
+
+			employeeMonthName.setText(f.getName());
+
+		}catch(NullPointerException e) {
+			System.out.println("there is no many employees to know "
+					+ "who is the emloyee of the month (at least two)");
+		}
+	}
+
+
+	@FXML
+	void binaryType(ActionEvent event) {
+		try {
+			String id = idToSearch.getText();
+			TypeOfSearchLB.setText("Binary");
+			if(clientOfSearchB.isSelected()) {
+				Client searched = shop.findBinaryClient(id);
+				NameOfSearchLB.setText(searched.getName());
+				idOfSearchLB.setText(searched.getId());
+				phoneOfSearchLB.setText(searched.getPhone());
+			}
+			if(employeeOfSearchB.isSelected()) {
+				Employee searched = shop.findBinaryEmployee(id);
+				NameOfSearchLB.setText(searched.getName());
+				idOfSearchLB.setText(searched.getId());
+				phoneOfSearchLB.setText(searched.getPhone());
+				shop.orderByIdEmployeeMenorToBig();
+			}
+		}catch(NullPointerException e) {
+			System.out.println("We didnt find the person (maybe is the other type "
+					+ "of peroson or just dont exisist in the system) or the numeber of employees its not pair");
+		}
+	}
+
+	@FXML
+	void tradicionalType(ActionEvent event) {
+		try {
+			String id = idToSearch.getText();
+			TypeOfSearchLB.setText("Tradicional");
+			if(clientOfSearchB.isSelected()) {
+				Client searched = shop.findClient(id);
+				NameOfSearchLB.setText(searched.getName());
+				idOfSearchLB.setText(searched.getId());
+				phoneOfSearchLB.setText(searched.getPhone());
+			}
+			if(employeeOfSearchB.isSelected()) {
+				Employee searched = shop.searchEmployee(id);
+				NameOfSearchLB.setText(searched.getName());
+				idOfSearchLB.setText(searched.getId());
+				phoneOfSearchLB.setText(searched.getPhone());
+			}
+		}catch(NullPointerException e) {
+			System.out.println("We didnt find the person (maybe is the other type "
+					+ "of peroson or just dont exisist in the system)");
+		}
+	}
+
+
+
+	@FXML
+	void posOrder(ActionEvent event) {
+		ObservableList<Employee> observableList2 ;
+		observableList2 = FXCollections.observableArrayList(shop.getPosOrder());
+
+		NamesTv.setItems(observableList2);
+
+
+		NamesTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
+		IdTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("id"));
+		CATEGORY.setText("You choose to organize : POSTORDER");
+
+	}
+
+	@FXML
+	void preOrder(ActionEvent event) {
+		ObservableList<Employee> observableList2 ;
+		observableList2 = FXCollections.observableArrayList(shop.getPreOrder());
+
+		NamesTv.setItems(observableList2);
+
+
+		NamesTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
+		IdTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("id"));
+		CATEGORY.setText("You choose to organize : PREORDER");
+	}
+
+	@FXML
+	void Inorder(ActionEvent event) {
+		ObservableList<Employee> observableList2 ;
+		observableList2 = FXCollections.observableArrayList(shop.getInOrder());
+
+		NamesTv.setItems(observableList2);
+
+
+		NamesTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
+		IdTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("id"));
+		CATEGORY.setText("You choose to organize : INORDER");
+	}
+
+
+	@FXML
+	void IdOrd(ActionEvent event) {
+		ObservableList<Employee> observableList2 ;
+		observableList2 = FXCollections.observableArrayList(shop.orderByIdEmployeeMenorToBig());
+
+		NamesTv.setItems(observableList2);
+
+
+		NamesTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
+		IdTc.setCellValueFactory(new PropertyValueFactory<Employee,String>("id"));
+
+		CATEGORY.setText("You choose to organize :  ID");
+	}
+
+
+
+	public void updateWindMill() {
+		List<Windmill> ls = shop.getWindmill();
+
+		RectaNegro1.setRotate(ls.get(0).getRotation());
+		RectaNegro2.setRotate(ls.get(1).getRotation());
+		RectaAmarillo1.setRotate(ls.get(2).getRotation());
+		RectaAmarillo2.setRotate(ls.get(3).getRotation());
+	}
+
+
+	public void updateAppear() {
+
+		APPEARDISA.setVisible(true);
+
+
+	}
+	public void updateDisappear() {
+
+		APPEARDISA.setVisible(false);
+
+
+	}
+	
+    @FXML
+    void writeData(ActionEvent event) throws IOException, ClientNullException, EmployeeNullException {
+    	shop.writteData();
+    }
 }

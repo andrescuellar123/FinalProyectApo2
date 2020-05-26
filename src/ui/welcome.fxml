@@ -4,13 +4,19 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar>
+      <MenuBar prefHeight="25.0" prefWidth="496.0">
         <menus>
           <Menu mnemonicParsing="false" text="Register">
                <items>
@@ -42,15 +48,39 @@
                   <MenuItem mnemonicParsing="false" onAction="#BetterEmployeeWindow" text="The Employee of the month" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="WriteData">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#writeDataWindow" text="Action 1" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
-      <BorderPane fx:id="mainPanel" prefHeight="200.0" prefWidth="200.0">
+      <BorderPane fx:id="mainPanel" prefHeight="367.0" prefWidth="600.0" style="-fx-background-color: #00FFFF;">
          <center>
-            <Label text="¡¡¡SHOP PROGRAM!!!" textFill="#4015a4" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="37.0" />
-               </font>
-            </Label>
+            <Pane prefHeight="330.0" prefWidth="600.0" style="-fx-background-color: #00FFFF;" BorderPane.alignment="CENTER">
+               <children>
+                  <Polygon fill="#7a8086" layoutX="101.0" layoutY="153.0" points="-60.0, 15.0, 59.0, 15.0, 0.0, -60.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="187.0" layoutX="42.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" width="117.0" />
+                  <Rectangle fx:id="RectaNegro1" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="97.0" layoutY="68.0" stroke="BLACK" strokeType="INSIDE" width="9.0" />
+                  <Rectangle fx:id="RectaNegro2" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="100.0" layoutY="68.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="9.0" />
+                  <Circle layoutX="101.0" layoutY="168.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Polygon fill="#0a6f14" layoutX="457.0" layoutY="153.0" points="-60.0, 15.0, 59.0, 15.0, 0.0, -60.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ae9a8c" height="187.0" layoutX="398.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" width="117.0" />
+                  <Rectangle fx:id="RectaAmarillo1" arcHeight="5.0" arcWidth="5.0" fill="#d1ff06" height="200.0" layoutX="452.0" layoutY="68.0" stroke="BLACK" strokeType="INSIDE" width="9.0" />
+                  <Rectangle fx:id="RectaAmarillo2" arcHeight="5.0" arcWidth="5.0" fill="#d1ff06" height="200.0" layoutX="452.0" layoutY="68.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="9.0" />
+                  <Circle fill="WHITE" layoutX="457.0" layoutY="168.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+                  <ImageView fx:id="APPEARDISA" fitHeight="36.0" fitWidth="49.0" layoutX="18.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/arrow-145768_960_720.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="101.0" layoutY="5.0" prefHeight="54.0" prefWidth="452.0" text="¡¡¡ PROGRAM FOR THE SHOP!!!" textAlignment="RIGHT" textFill="#a31515">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </center>
       </BorderPane>
    </children>
