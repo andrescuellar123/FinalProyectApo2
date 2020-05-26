@@ -66,18 +66,7 @@ public class Employee extends Human{
 		this.clients = clients;
 	}
 
-//	@Override
-//	public int compareTo(Employee em) {
-//		int substraction = 0;
-//		double x = this.getId().compareTo(em.getId());
-//		if(x > 0) {
-//			substraction = 1;
-//		}else if(x < 0) {
-//			substraction = -1;
-//		}
-//		return substraction;
-//	}
-	
+
 	
 	public void addClient(String name, String id,String phone) {
 		Client c = new Client (name, id,phone,false);
@@ -103,7 +92,7 @@ public class Employee extends Human{
 	        returnString += posOrder(node.getDer())+" ";
 	        returnString += node.getName();
 	    }
-	  
+	   
 	    return returnString;
 	}
 	
@@ -121,7 +110,7 @@ public class Employee extends Human{
 	    String returnString = "";
 	    if (node != null) {
 	    	returnString += node.getName();
-	        returnString += preOrder(node.getIzq());
+	        returnString += preOrder(node.getIzq())+" ";
 	        returnString += preOrder(node.getDer())+" ";
 	        
 	    }

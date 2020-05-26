@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -28,7 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import model.*;
-public class ShopProgramGUI implements Initializable {
+public class ShopProgramGUI implements Initializable{
 	private ShopProgram shop;
 
 	@FXML
@@ -171,7 +172,19 @@ public class ShopProgramGUI implements Initializable {
 
 	@FXML
 	public ImageView APPEARDISA;
+	
 
+    @FXML
+    private ImageView DIRECTIONIMG;
+    
+    
+    @FXML
+    private Label resp;
+    
+    @FXML
+    private TextField NAMEDATA;
+    @FXML
+    private Label indication;
 	/**
 	 * @param shop
 	 */
@@ -181,6 +194,7 @@ public class ShopProgramGUI implements Initializable {
 
 	@FXML
 	void AddProductWindow(ActionEvent event) throws IOException {
+		shop.setSpin(false);
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddProductWindow.fxml"));
 
 		fxmlLoader.setController(this);    	
@@ -193,6 +207,7 @@ public class ShopProgramGUI implements Initializable {
 
 	@FXML
 	void BetterEmployeeWindow(ActionEvent event) throws IOException {
+		shop.setSpin(false);
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BetterEmployeeWindow.fxml"));
 
 		fxmlLoader.setController(this);    	
@@ -204,6 +219,7 @@ public class ShopProgramGUI implements Initializable {
 
 	@FXML
 	public void ListWindow(ActionEvent event) throws IOException {
+		shop.setSpin(false);
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ListWindow.fxml"));
 
 		fxmlLoader.setController(this);    	
@@ -217,6 +233,7 @@ public class ShopProgramGUI implements Initializable {
 
 	@FXML
 	void OrganizeWindow(ActionEvent event) throws IOException {
+		shop.setSpin(false);
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Organize2.fxml"));
 
 		fxmlLoader.setController(this);    	
@@ -228,6 +245,7 @@ public class ShopProgramGUI implements Initializable {
 
 	@FXML
 	public void RegisterWindow(ActionEvent event) throws IOException {
+		shop.setSpin(false);
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RegisterWindow.fxml"));
 
 		fxmlLoader.setController(this);    	
@@ -239,6 +257,7 @@ public class ShopProgramGUI implements Initializable {
 
 	@FXML
 	public void SearchWindow(ActionEvent event) throws IOException {
+		shop.setSpin(false);
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SearchWindow.fxml"));
 
 		fxmlLoader.setController(this);    	
@@ -249,12 +268,14 @@ public class ShopProgramGUI implements Initializable {
 		
     @FXML
     void writeDataWindow(ActionEvent event) throws IOException {
+    	shop.setSpin(false);
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WriteDataWindow.fxml"));
 
 		fxmlLoader.setController(this);    	
 		Parent pa7 = (Parent)fxmlLoader.load();
 		mainPanel.getChildren().clear();
 		mainPanel.setTop(pa7);
+		DIRECTIONIMG.setVisible(false);
     }
 	@FXML
 	void AddPerson(ActionEvent event) throws RepetitiveException {
@@ -271,6 +292,8 @@ public class ShopProgramGUI implements Initializable {
 			th.setText(r);
 			nameTxt.clear();
 			idTxt.clear();
+			phTxt1.clear();
+			TrueB.setSelected(false);
 		}
 		else if(FalseB.isSelected()) {
 
@@ -280,6 +303,8 @@ public class ShopProgramGUI implements Initializable {
 			th.setText(r);
 			nameTxt.clear();
 			idTxt.clear();
+			phTxt1.clear();
+			FalseB.setSelected(false);
 		}
 
 	}
@@ -302,17 +327,22 @@ public class ShopProgramGUI implements Initializable {
 			//+" Employee " +y.getName()
 			y = shop.searchEmployee(idEmployee);
 			shop.addClientToEmployee(idEmployee, x.getId(), x.getName(), x.getPhone());
-			PrResponse.setText(x.getName()+" "+ x.getProd().get(x.getProd().size()-1).getName());
+			PrResponse.setText("Client name is: "+x.getName()+" and bought this: "+ x.getProd().get(x.getProd().size()-1).getName());
+			Prname.clear();
+			PrId.clear();
+			Prcost.clear();
+			PrEmployeeId.clear();
 		}catch(NullPointerException e) {
 			System.out.println("We didnt find the person (dont exisist in the system)");
+		}
+		catch(NumberFormatException e) {
+			System.out.println("Write properly the information");
 		}
 	}
 
 		 @Override
 		 public void initialize(URL location, ResourceBundle resources) {
-	
-			 
-				shop = new ShopProgram();
+
 				new WindmillThread(shop, this).start();
 				new ImageAppearThread(shop, this).start();
 				new ImageDisappearThread(shop, this).start();
@@ -320,6 +350,8 @@ public class ShopProgramGUI implements Initializable {
 				shop.addSquares(RectaNegro2.getRotate());
 				shop.addSquares(RectaAmarillo1.getRotate());
 				shop.addSquares(RectaAmarillo2.getRotate());
+			 
+				
 	
 		 }
 
@@ -355,6 +387,7 @@ public class ShopProgramGUI implements Initializable {
 
 	private void initializeEmployeeOfTheMonth() {
 		try {
+			shop.searchEmployee(shop.getEmpleadoRaiz().getId());
 			shop.orderByIdEmployeeMenorToBig();
 			shop.searchEmployee(shop.getEmpleadoRaiz().getId());
 			Employee f = shop.findingTheEmployeeOfTheMonth();
@@ -364,7 +397,8 @@ public class ShopProgramGUI implements Initializable {
 
 		}catch(NullPointerException e) {
 			System.out.println("there is no many employees to know "
-					+ "who is the emloyee of the month (at least two)");
+					+ "who is the emloyee of the month (at least two) ");
+			System.out.println("Or thre is not sells registered in the program");
 		}
 	}
 
@@ -389,7 +423,7 @@ public class ShopProgramGUI implements Initializable {
 			}
 		}catch(NullPointerException e) {
 			System.out.println("We didnt find the person (maybe is the other type "
-					+ "of peroson or just dont exisist in the system) or the numeber of employees its not pair");
+					+ "of person or just dont exisist in the system)");
 		}
 	}
 
@@ -419,7 +453,7 @@ public class ShopProgramGUI implements Initializable {
 
 
 	@FXML
-	void posOrder(ActionEvent event) {
+	void posOrder(ActionEvent event) throws EmployeeNullException {
 		ObservableList<Employee> observableList2 ;
 		observableList2 = FXCollections.observableArrayList(shop.getPosOrder());
 
@@ -433,7 +467,7 @@ public class ShopProgramGUI implements Initializable {
 	}
 
 	@FXML
-	void preOrder(ActionEvent event) {
+	void preOrder(ActionEvent event) throws EmployeeNullException {
 		ObservableList<Employee> observableList2 ;
 		observableList2 = FXCollections.observableArrayList(shop.getPreOrder());
 
@@ -500,6 +534,15 @@ public class ShopProgramGUI implements Initializable {
 	
     @FXML
     void writeData(ActionEvent event) throws IOException, ClientNullException, EmployeeNullException {
-    	shop.writteData();
+    	try {
+    	String nameData = NAMEDATA.getText();
+    	indication.setVisible(false);
+    	shop.writteData(nameData);
+    	DIRECTIONIMG.setVisible(true);
+    	resp.setText("To know where is the report check out the folder in the image");
+    	}
+    	catch(FileNotFoundException e) {
+    		System.out.println("Dont write / when you are writing the name of file  ");
+    	}
     }
 }

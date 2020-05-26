@@ -23,10 +23,11 @@ public class test {
 		sh.addHumanTree("pipo1", "0","5555");
 		sh.addHumanTree("pipo1", "1","5555");
 //		sh.addHumanTree("pipo", "2","5555");
-
+		
+		sh.addProduct("ewq", 100000, "2");
 		System.out.println(sh.ShowClients2());
 		System.out.println(sh.getEmpleadoRaiz().getId());
-		sh.writteData();
+		sh.writteData("pepe");
 		System.out.println("////////inordepocho////");
 		System.out.println(sh.inOrderName(sh.getEmpleadoRaiz()));
 //		

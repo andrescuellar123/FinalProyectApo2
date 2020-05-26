@@ -94,18 +94,12 @@ public class Client extends Human {
 		this.total = total;
 	}
 	
-//	public double total() {
-//		
-//		for (int i = 0; i < prod.size(); i++) {
-//			total+= prod.get(i).getCost();
-//		}
-//		return total;
-//	}
-
-	
-	
-
-	
-
-
 }
+
+	
+	
+
+	
+
+
+
